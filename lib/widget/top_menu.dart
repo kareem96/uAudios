@@ -5,6 +5,8 @@
 import 'dart:io';
 
 import 'package:appaudios/audio_service/service_locator.dart';
+import 'package:appaudios/screen/audio_archive/audio_archive.dart';
+import 'package:appaudios/screen/settings/settings.dart';
 import 'package:appaudios/utils/constants/constants.dart';
 import 'package:appaudios/utils/helper/navigator_helper.dart';
 import 'package:flutter/cupertino.dart';
@@ -69,16 +71,17 @@ class _TopMenuState extends State<TopMenu> {
                   onSelected: (value) {
                     switch (value) {
                       case 'Settings':
-                        getIt<NavigationService>().navigateTo('Settings.route');
+                        getIt<NavigationService>().navigateTo(Settings.route);
+                        break;
+                      case 'Audio Archive':
+                        getIt<NavigationService>()
+                            .navigateTo(AudioArchive.route);
                         break;
                       case 'Schedule':
                         getIt<NavigationService>()
                             .navigateTo('RadioSchedule.route');
                         break;
-                      case 'Audio Archive':
-                        getIt<NavigationService>()
-                            .navigateTo('AudioArchive.route');
-                        break;
+
                     }
                   },
                 ),

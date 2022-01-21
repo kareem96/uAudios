@@ -8,7 +8,7 @@ import 'package:appaudios/widget/bottom_media_player.dart';
 import 'package:flutter/material.dart';
 
 class AudioArchive extends StatefulWidget {
-  static const String route = 'audioaArchive';
+  static const String route = 'audioArchive';
   const AudioArchive({Key? key}) : super(key: key);
 
   @override

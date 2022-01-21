@@ -2,7 +2,9 @@ import 'package:appaudios/audio_service/service_locator.dart';
 import 'package:appaudios/bloc/radio/radio_index_bloc.dart';
 import 'package:appaudios/bloc/radio/radio_loading_bloc.dart';
 import 'package:appaudios/bloc/settings/app_theme_bloc.dart';
+import 'package:appaudios/bloc/settings/initial_radio_index_bloc.dart';
 import 'package:appaudios/screen/home.dart';
+import 'package:appaudios/screen/settings/settings.dart';
 import 'package:appaudios/utils/constants/constants.dart';
 import 'package:appaudios/utils/helper/navigator_helper.dart';
 import 'package:flutter/material.dart';
@@ -61,6 +63,10 @@ class MyApp extends StatelessWidget {
           create: (_) => RadioLoadingBloc(),
           dispose: (_, RadioLoadingBloc radioLoadingBloc) => radioLoadingBloc.dispose(),
         ),
+        Provider<InitialRadioIndexBloc>(
+          create: (_) => InitialRadioIndexBloc(),
+          dispose: (_, InitialRadioIndexBloc initialRadioIndexBloc) => initialRadioIndexBloc.dispose(),
+        ),
         StreamProvider<InternetConnectionStatus>(
             initialData: InternetConnectionStatus.connected,
             create: (context) => InternetStatus().internetStatusStreamController.stream,
@@ -86,7 +92,7 @@ class MyApp extends StatelessWidget {
                 home: Home(),
                 navigatorKey: getIt<NavigationService>().navigatorKey,
                 routes: {
-
+                  Settings.route: (context) => const Settings(),
                 },
               );
             },
