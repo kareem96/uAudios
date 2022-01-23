@@ -8,7 +8,7 @@ import 'package:appaudios/widget/bottom_media_player.dart';
 import 'package:flutter/material.dart';
 
 class AudioArchive extends StatefulWidget {
-  static const String route = 'audioArchive';
+  static const String route = 'audio';
   const AudioArchive({Key? key}) : super(key: key);
 
   @override
@@ -24,11 +24,11 @@ class _AudioArchiveState extends State<AudioArchive> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Audio Archives'),
+        title: const Text('Audio'),
         backgroundColor: MaterialStateColor.resolveWith((Set<MaterialState> states) {
           return states.contains(MaterialState.scrolledUnder)
               ? ((isDarkTheme)
-              ?  const Color(0xFFE86413)
+              ? Colors.grey[700]!
               : Theme.of(context).colorScheme.secondary)
               : Theme.of(context).primaryColor;
         }),
@@ -46,31 +46,50 @@ class _AudioArchiveState extends State<AudioArchive> {
   Widget _audioArchiveGrid(bool isDarkTheme) {
     return Scrollbar(
       child: GridView(
+        padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewPadding.bottom),
         physics: const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        children: Constants.of(context)!.audioArchive.keys.map((imageAsset) {
-          return Material(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2,),
+        children: Constants.of(context)!.audio.keys.map((imageAsset) {
+          return Card(color:Colors.red);
+          /*Material(
             color: Colors.transparent,
             child: Padding(
               padding: const EdgeInsets.all(5),
               child: Card(
                 elevation: 5,
-                shadowColor: isDarkTheme ? Colors.white : Theme.of(context).primaryColor,
+                shadowColor:
+                    isDarkTheme ? Colors.white : Theme.of(context).primaryColor,
                 child: InkWell(
-                  onTap: (){
-                    _navigateAudioArchive(Constants.of(context)!.audioArchive[imageAsset]);
+                  onTap: () {
+                    _navigateAudioArchive(
+                        MyConstants.of(context)!.audioArchive[imageAsset]);
                   },
-                  child: Ink(),
+                  child: Ink(
+                    decoration: BoxDecoration(
+                      image: DecorationImage(
+                        image: AssetImage(imageAsset),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                  ),
                 ),
               ),
             ),
-          );
+          );*/
         }).toList(),
       ),
     );
   }
 
   void _navigateAudioArchive(String? title) {
+    bool isMedia = Constants.of(context)!.audioArchiveFids.containsKey(title);
+    if(isMedia){
+      /*Navigator.push(
+          context,
+          MaterialPageRoute(
 
+          )
+      )*/
+    }
   }
 }
