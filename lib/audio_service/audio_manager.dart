@@ -56,15 +56,16 @@ class AudioManager {
     return;
   }
 
-  Future<MediaItem>_getRadio(Map<String, String> radioStream, int index)async {
+  Future<MediaItem> _getRadio(Map<String, String> radioStream, int index) async {
+    // Get the path of image for artUri in notification
     String path = await MediaHelper.getDefaultNotificationImage();
     String key = radioStream.keys.toList()[index];
     String value = radioStream.values.toList()[index];
     return MediaItem(
         id: key,
         title: key,
-        album: 'uAudios',
-        artist: 'uAudios',
+        album: "Radio Sai Global Harmony",
+        artist: "Radio Sai",
         artUri: Uri.parse('file://$path'),
         extras: {'uri': value});
   }

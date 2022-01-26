@@ -12,7 +12,7 @@ enum MediaType{radio, media,}
 class MediaHelper{
 
   /// url for media
-  static String mediaBaseUrl = 'https://dl.radiosai.org';
+  static String mediaBaseUrl = 'https://dl.radiosai.org/';
   /// type file
   static String mediaFileType = '.mp3';
 
@@ -56,12 +56,12 @@ class MediaHelper{
     return pathDirectory.path;
   }
 
-  static Future<String> getDefaultNotificationImage()async{
+  static Future<String> getDefaultNotificationImage() async {
     String path = await _getNotificationFilePath();
     File file = File(path);
     bool fileExists = file.existsSync();
-    if(fileExists) return path;
-    final byteData = await rootBundle.load('assets/sai_listen_notification.jpg');
+    if (fileExists) return path;
+    final byteData = await rootBundle.load('assets/sai_listens_notification.jpg');
     file.create(recursive: true);
     await file.writeAsBytes(byteData.buffer.asUint8List());
     return path;
@@ -70,7 +70,7 @@ class MediaHelper{
   static Future<String> _getNotificationFilePath()async {
     Directory appDocDir = await getApplicationDocumentsDirectory();
     String appDocPath = appDocDir.path;
-    String filePath = '$appDocPath/sai_listen_notification.jpg';
+    String filePath = '$appDocPath/sai_listens_notification.jpg';
     return filePath;
   }
 

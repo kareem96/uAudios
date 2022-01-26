@@ -1,4 +1,5 @@
 import 'package:appaudios/audio_service/service_locator.dart';
+import 'package:appaudios/bloc/media/media_screen_bloc.dart';
 import 'package:appaudios/bloc/radio/radio_index_bloc.dart';
 import 'package:appaudios/bloc/radio/radio_loading_bloc.dart';
 import 'package:appaudios/bloc/radio_schedule/time_zone_bloc.dart';
@@ -6,9 +7,11 @@ import 'package:appaudios/bloc/settings/app_theme_bloc.dart';
 import 'package:appaudios/bloc/settings/initial_radio_index_bloc.dart';
 import 'package:appaudios/screen/audio_archive/audio_archive.dart';
 import 'package:appaudios/screen/home.dart';
+import 'package:appaudios/screen/media_player/media_player.dart';
 import 'package:appaudios/screen/schedule/radio_schedule.dart';
 import 'package:appaudios/screen/settings/settings.dart';
 import 'package:appaudios/utils/constants/constants.dart';
+import 'package:appaudios/utils/helper/download_helper.dart';
 import 'package:appaudios/utils/helper/navigator_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -74,6 +77,10 @@ class MyApp extends StatelessWidget {
           create: (_) => TimeZoneBloc(),
           dispose: (_, TimeZoneBloc timeZoneBloc) => timeZoneBloc.dispose(),
         ),
+        Provider<MediaScreenBloc?>(
+          create: (_) => DownLoadHelper.getMediaScreenBloc(),
+          dispose: (_, MediaScreenBloc? mediaScreenbloc) => mediaScreenbloc!.dispose(),
+        ),
         StreamProvider<InternetConnectionStatus>(
             initialData: InternetConnectionStatus.connected,
             create: (context) => InternetStatus().internetStatusStreamController.stream,
@@ -102,6 +109,7 @@ class MyApp extends StatelessWidget {
                   Settings.route: (context) => const Settings(),
                   AudioArchive.route: (context) => const AudioArchive(),
                   RadioSchedule.route: (context) => const RadioSchedule(),
+                  MediaPlayer.route: (context) => const MediaPlayer(),
                 },
               );
             },
